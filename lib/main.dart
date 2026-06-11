@@ -17,7 +17,35 @@ class PokemonApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Pokemon Infinite Scroll',
       theme: ThemeData(
-        colorSchemeSeed: Colors.red,
+        primaryColor: Colors.red,
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.red,
+          foregroundColor: Colors.white,
+          centerTitle: true,
+        ),
+        cardTheme: CardThemeData(
+          color: Colors.white,
+          shadowColor: Colors.red,
+          elevation: 6,
+          margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+            side: const BorderSide(color: Colors.red, width: 2),
+          ),
+        ),
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(color: Colors.black),
+          titleLarge: TextStyle(
+            color: Colors.red,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.red,
+          primary: Colors.red,
+          secondary: Colors.white,
+        ),
         useMaterial3: true,
       ),
       home: const PokemonPage(),
@@ -89,7 +117,6 @@ class _PokemonPageState extends State<PokemonPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Pokémon Scroll Infinito'),
-        centerTitle: true,
       ),
       body: PagingListener(
         controller: _pagingController,
@@ -112,8 +139,6 @@ class _PokemonPageState extends State<PokemonPage> {
                 final stats = pokemon['stats'] as List;
 
                 return Card(
-                  margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  elevation: 4,
                   child: Padding(
                     padding: const EdgeInsets.all(16),
                     child: Column(
@@ -124,7 +149,7 @@ class _PokemonPageState extends State<PokemonPage> {
                             image,
                             height: 120,
                             errorBuilder: (_, __, ___) =>
-                                const Icon(Icons.image_not_supported),
+                                const Icon(Icons.image_not_supported, color: Colors.red),
                           ),
                         ),
                         const SizedBox(height: 10),
@@ -134,6 +159,7 @@ class _PokemonPageState extends State<PokemonPage> {
                             style: const TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
+                              color: Colors.red,
                             ),
                           ),
                         ),
@@ -146,15 +172,18 @@ class _PokemonPageState extends State<PokemonPage> {
                         Text('Número de movimientos: ${moves.length}'),
                         const SizedBox(height: 8),
                         const Text('Tipos:',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, color: Colors.red)),
                         ...types.map((t) => Text(t['type']['name'])),
                         const SizedBox(height: 8),
                         const Text('Habilidades:',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, color: Colors.red)),
                         ...abilities.map((a) => Text(a['ability']['name'])),
                         const SizedBox(height: 8),
                         const Text('Estadísticas base:',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, color: Colors.red)),
                         ...stats.map((s) =>
                             Text('${s['stat']['name']}: ${s['base_stat']}')),
                       ],
